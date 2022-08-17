@@ -176,6 +176,66 @@ class Lexico(Type):
     def esPunto(self, character):
         return character == "."
    
+    def esComilla(self, caracter):
+        return caracter == "\""
+        
+    def esSuma(self, caracter):
+        return caracter == "+"
+
+    def esResta(self, caracter):
+        return caracter == "-"
+
+    def esMultiplicacion(self, caracter):
+        return caracter == "*"
+
+    def esDivision(self, caracter):
+        return caracter == "/"
+
+    def esMayorQue(self, caracter):
+        return caracter == ">"
+
+    def esMenorQue(self, caracter):
+        return caracter == "<"
+
+    def esPipe(self, caracter):
+        return caracter == "|"
+
+    def esAmpersand(self, caracter):
+        return caracter == "&"
+
+    def esFactorial(self, caracter):
+        return caracter == "!"
+
+    def esPuntoYComa(self, caracter):
+        return caracter == ";"
+
+    def esComa(self, caracter):
+        return caracter == ","
+
+    def esParentesisAbierto(self, caracter):
+        return caracter == "("
+
+    def esParentesisCerrado(self, caracter):
+        return caracter == ")"
+
+    def esLlaveAbierta(self, caracter):
+        return caracter == "{"
+
+    def esLlaveCerrada(self, caracter):
+        return caracter == "}"
+
+    def esBracketAbierto(self, caracter):
+        return caracter == "["
+
+    def esBracketCerrado(self, caracter):
+        return caracter == "]"
+
+    def esIgual(self, caracter):
+        return caracter == "="
+
+    def esDosPuntos(self, caracter):
+        return caracter == ":"
+   
     # TODO posibles estados
 
     def state00(self):
