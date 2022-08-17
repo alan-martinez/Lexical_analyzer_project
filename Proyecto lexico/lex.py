@@ -120,22 +120,79 @@ class Lexico(Type):
                 9: self.state09,
                 10: self.state10,
                 11: self.state11,
+                12: self.state12,
+                13: self.state13,
+                14: self.state14,
+                15: self.state15,
+                16: self.state16,
+                17: self.state17,
+                18: self.state18,
+                19: self.state19,
+                20: self.state20,
+                21: self.state21,
+                22: self.state22,
+                23: self.state23,
+                24: self.state24,
+                25: self.state25,
+                26: self.state26,
+                27: self.state27,
+                28: self.state28,
+                29: self.state29,
+                30: self.state30,
+                31: self.state31,
+                32: self.state32
                 
             }
 
             switch.get(self.state, self.error)()
 
-        if self.type < 11:
+        if self.type < 50:
 
             switch = {
                 -1: self.error, # ERROR
-                2: self.tipo00, # Identificador
-                3: self.tipo01, # Entero
-                5: self.tipo02, # Real
-                12: self.tipo09 # Peso
+                2: self.type00, # Identificador
+                3: self.type01, # Entero
+                5: self.type02, # Real
+                7: self.type03, # Cadena
+                8: self.type05, # Suma
+                9: self.type06, # Resta
+                10: self.type07, # Multiplicacion
+                11: self.type08, # Division
+                17: self.type09, # OR
+                19: self.type10, # AND
+                20: self.type11, # NOT
+                14: self.type12, # Mayor que
+                12: self.type13, # Menor que
+                15: self.type14, # Mayor o igual que
+                13: self.type15, # Menor o igual que
+                22: self.type16, # Igual
+                23: self.type17, # Es igual
+                21: self.type18, # Es diferente
+                24: self.type19, # Punto y coma
+                25: self.type20, # Coma
+                26: self.type21, # Parantesis abierto
+                27: self.type22, # Parentesis cerrado
+                28: self.type23, # Llave abierta
+                29: self.type24, # Llave cerrada
+                30: self.type25, # Bracket abierto
+                31: self.type26, # Bracket cerrado
+                32: self.type27, # Dos puntos
+                34: self.type34 # Peso
             }
 
             switch.get(self.state, self.error)()
+
+    def verificarPalabraReservada(self, symbol):
+        palabrasReservadas = {
+            "int": self.INT,
+            "float": self.FLOAT,
+            "void": self.VOID,
+            "if": self.IF,
+            "while": self.WHILE,
+            "return": self.RETURN,
+            "else": self.ELSE
+        }
+        self.type = palabrasReservadas.get(symbol, self.type)
 
 
     def nextCharacter(self):
@@ -154,9 +211,11 @@ class Lexico(Type):
         if not self.esPeso(self.character):
             self.indice -= 1
         self.continua = False
+        self.verificarPalabraReservada(self.symbol)
 
     def terminado(self):
         return self.indice >= len(self.input)
+    
 
     def esPeso(self, character):
         return character == "$"
@@ -176,67 +235,67 @@ class Lexico(Type):
     def esPunto(self, character):
         return character == "."
    
-    def esComilla(self, caracter):
-        return caracter == "\""
+    def esComilla(self, character):
+        return character == "\""
         
-    def esSuma(self, caracter):
-        return caracter == "+"
+    def esSuma(self, character):
+        return character == "+"
 
-    def esResta(self, caracter):
-        return caracter == "-"
+    def esResta(self, character):
+        return character == "-"
 
-    def esMultiplicacion(self, caracter):
-        return caracter == "*"
+    def esMultiplicacion(self, character):
+        return character == "*"
 
-    def esDivision(self, caracter):
-        return caracter == "/"
+    def esDivision(self, character):
+        return character == "/"
 
-    def esMayorQue(self, caracter):
-        return caracter == ">"
+    def esMayorQue(self, character):
+        return character == ">"
 
-    def esMenorQue(self, caracter):
-        return caracter == "<"
+    def esMenorQue(self, character):
+        return character == "<"
 
-    def esPipe(self, caracter):
-        return caracter == "|"
+    def esPipe(self, character):
+        return character == "|"
 
-    def esAmpersand(self, caracter):
-        return caracter == "&"
+    def esAmpersand(self, character):
+        return character == "&"
 
-    def esFactorial(self, caracter):
-        return caracter == "!"
+    def esFactorial(self, character):
+        return character == "!"
 
-    def esPuntoYComa(self, caracter):
-        return caracter == ";"
+    def esPuntoYComa(self, character):
+        return character == ";"
 
-    def esComa(self, caracter):
-        return caracter == ","
+    def esComa(self, character):
+        return character == ","
 
-    def esParentesisAbierto(self, caracter):
-        return caracter == "("
+    def esParentesisAbierto(self, character):
+        return character == "("
 
-    def esParentesisCerrado(self, caracter):
-        return caracter == ")"
+    def esParentesisCerrado(self, character):
+        return character == ")"
 
-    def esLlaveAbierta(self, caracter):
-        return caracter == "{"
+    def esLlaveAbierta(self, character):
+        return character == "{"
 
-    def esLlaveCerrada(self, caracter):
-        return caracter == "}"
+    def esLlaveCerrada(self, character):
+        return character == "}"
 
-    def esBracketAbierto(self, caracter):
-        return caracter == "["
+    def esBracketAbierto(self, character):
+        return character == "["
 
-    def esBracketCerrado(self, caracter):
-        return caracter == "]"
+    def esBracketCerrado(self, character):
+        return character == "]"
 
-    def esIgual(self, caracter):
-        return caracter == "="
+    def esIgual(self, character):
+        return character == "="
 
-    def esDosPuntos(self, caracter):
-        return caracter == ":"
+    def esDosPuntos(self, character):
+        return character == ":"
    
-    # TODO posibles estados
+    # TODO posibles states
 
     def state00(self):
         self.continua = False
@@ -248,6 +307,46 @@ class Lexico(Type):
             self.nextState(2)
         elif self.esNumero(self.character):
             self.nextState(3)
+        elif self.esComilla(self.character):
+            self.nextState(6)
+        elif self.esSuma(self.character):
+            self.nextState(8)
+        elif self.esResta(self.character):
+            self.nextState(9)
+        elif self.esMultiplicacion(self.character):
+            self.nextState(10)
+        elif self.esDivision(self.character):
+            self.nextState(11)
+        elif self.esMenorQue(self.character):
+            self.nextState(12)
+        elif self.esMayorQue(self.character):
+            self.nextState(14)
+        elif self.esPipe(self.character):
+            self.nextState(16)
+        elif self.esAmpersand(self.character):
+            self.nextState(18)
+        elif self.esFactorial(self.character):
+            self.nextState(20)
+        elif self.esIgual(self.character):
+            self.nextState(22)
+        elif self.esPuntoYComa(self.character):
+            self.nextState(24)
+        elif self.esComa(self.character):
+            self.nextState(25)
+        elif self.esParentesisAbierto(self.character):
+            self.nextState(26)
+        elif self.esParentesisCerrado(self.character):
+            self.nextState(27)
+        elif self.esLlaveAbierta(self.character):
+            self.nextState(28)
+        elif self.esLlaveCerrada(self.character):
+            self.nextState(29)
+        elif self.esBracketAbierto(self.character):
+            self.nextState(30)
+        elif self.esBracketCerrado(self.character):
+            self.nextState(31)
+        elif self.esDosPuntos(self.character):
+            self.nextState(32)
         elif self.esEspacio(self.character):
             self.state = 1
         else:
@@ -261,6 +360,7 @@ class Lexico(Type):
             self.nextState(2)
         elif self.esEspacio(self.character):
             self.continua = False
+            self.verificarPalabraReservada(self.symbol)
         else:
             self.retroceso()
 
@@ -290,7 +390,9 @@ class Lexico(Type):
             self.retroceso()
 
     def state06(self):
-        if self.esCaracter(self.character):
+        if self.esComilla(self.character):
+            self.nextState(7)
+        elif self.esCaracter(self.character):
             self.nextState(6)
         else:
             self.retroceso()
@@ -309,22 +411,189 @@ class Lexico(Type):
 
     def state11(self):
         self.retroceso()
-        
-    # Tipos validos
+    
+    def state12(self):
+        if self.esIgual(self.character):
+            self.nextState(13)
+        elif self.esEspacio(self.character):
+            self.continua = False
+        else:
+            self.retroceso()
+    
+    def state13(self):
+        self.retroceso()
+
+    def state14(self):
+        if self.esIgual(self.character):
+            self.nextState(15)
+        elif self.esEspacio(self.character):
+            self.continua = False
+        else:
+            self.retroceso()
+    
+    def state15(self):
+        self.retroceso()
+
+    def state16(self):
+        if self.esPipe(self.character):
+            self.nextState(17)
+        elif self.esEspacio(self.character):
+            self.continua = False
+        else:
+            self.retroceso()
+
+    def state17(self):
+        self.retroceso()
+
+    def state18(self):
+        if self.esAmpersand(self.character):
+            self.nextState(19)
+        elif self.esEspacio(self.character):
+            self.continua = False
+        else:
+            self.retroceso()
+
+    def state19(self):
+        self.retroceso()
+
+    def state20(self):
+        if self.esIgual(self.character):
+            self.nextState(21)
+        elif self.esEspacio(self.character):
+            self.continua = False
+        else:
+            self.retroceso()
+
+    def state21(self):
+        self.retroceso()
+
+    def state22(self):
+        if self.esIgual(self.character):
+            self.nextState(23)
+        elif self.esEspacio(self.character):
+            self.continua = False
+        else:
+            self.retroceso()
+
+    def state23(self):
+        self.retroceso()
+
+    def state24(self):
+        self.retroceso()
+
+    def state25(self):
+        self.retroceso()
+
+    def state26(self):
+        self.retroceso()
+
+    def state27(self):
+        self.retroceso()
+
+    def state28(self):
+        self.retroceso()
+
+    def state29(self):
+        self.retroceso()
+
+    def state30(self):
+        self.retroceso()
+
+    def state31(self):
+        self.retroceso()
+
+    def state32(self):
+        self.retroceso()
+    # tipos validos
 
     def error(self):
         self.type = self.ERROR
 
-    def tipo00(self):
+    def type00(self):
         self.type = self.IDENTIFICADOR
 
-    def tipo01(self):
+    def type01(self):
         self.type = self.ENTERO
     
-    def tipo02(self):
+    def type02(self):
         self.type = self.REAL
+    
+    def type03(self):
+        self.type = self.CADENA
 
-    def tipo09(self):
+    def type04(self):
+        self.type = self.TIPO
+
+    def type05(self):
+        self.type = self.OPSUMA
+
+    def type06(self):
+        self.type = self.OPRESTA
+
+    def type07(self):
+        self.type = self.OPMULTIPLICACION
+
+    def type08(self):
+        self.type = self.OPDIVISION
+
+    def type09(self):
+        self.type = self.OPOR
+
+    def type10(self):
+        self.type = self.OPAND
+
+    def type11(self):
+        self.type = self.OPNOT
+
+    def type12(self):
+        self.type = self.OPMAYORQ
+
+    def type13(self):
+        self.type = self.OPMENORQ
+
+    def type14(self):
+        self.type = self.OPMAYOROIGUAL
+
+    def type15(self):
+        self.type = self.OPMENOROIGUAL
+
+    def type16(self):
+        self.type = self.OPIGUAL
+
+    def type17(self):
+        self.type = self.OPESIGUAL
+
+    def type18(self):
+        self.type = self.OPESDIFERENTE
+
+    def type19(self):
+        self.type = self.PUNTOYCOMA
+
+    def type20(self):
+        self.type = self.COMA
+
+    def type21(self):
+        self.type = self.PARENTESIOSABIERTO
+
+    def type22(self):
+        self.type = self.PARENTESISCERRADO
+
+    def type23(self):
+        self.type = self.LLAVEABIERTA
+
+    def type24(self):
+        self.type = self.LLAVECERRADA
+
+    def type25(self):
+        self.type = self.BRACKETABIERTO
+
+    def type26(self):
+        self.type = self.BRACKETCERRADO
+
+    def type27(self):
+        self.type = self.DOSPUNTOS
+
+    def type34(self):
         self.type = self.PESO
 
     
@@ -346,94 +615,94 @@ class Lexico(Type):
         self.typeString = "Real"
         
     def message_CADENA(self):
-        self.tipoCadenaMensaje = "Cadena"
+        self.typeString = "Cadena"
 
     def message_OPMAS(self):
-        self.tipoCadenaMensaje = "Mas"
+        self.typeString = "Mas"
 
     def message_OPMENOS(self):
-        self.tipoCadenaMensaje = "Menos"
+        self.typeString = "Menos"
 
     def message_OPMULTI(self):
-        self.tipoCadenaMensaje = "Multiplicacion"
+        self.typeString = "Multiplicacion"
 
     def message_OPDIV(self):
-        self.tipoCadenaMensaje = "Division"
+        self.typeString = "Division"
 
     def message_MAYORQUE(self):
-        self.tipoCadenaMensaje = "Mayor que"
+        self.typeString = "Mayor que"
 
     def message_MENORQUE(self):
-        self.tipoCadenaMensaje = "Menor que"
+        self.typeString = "Menor que"
 
     def message_MAYORIGUAL(self):
-        self.tipoCadenaMensaje = "Mayor o igual que"
+        self.typeString = "Mayor o igual que"
 
     def message_MENORIGUAL(self):
-        self.tipoCadenaMensaje = "Menor o igual que"
+        self.typeString = "Menor o igual que"
 
     def message_OR(self):
-        self.tipoCadenaMensaje = "Or"
+        self.typeString = "Or"
 
     def message_AND(self):
-        self.tipoCadenaMensaje = "And"
+        self.typeString = "And"
 
     def message_NOT(self):
-        self.tipoCadenaMensaje = "Not"
+        self.typeString = "Not"
 
     def message_IGUAL(self):
-        self.tipoCadenaMensaje = "Igual"
+        self.typeString = "Igual"
 
     def message_ESIGUAL(self):
-        self.tipoCadenaMensaje = "Es igual a"
+        self.typeString = "Es igual a"
 
     def message_ESDIFERENTE(self):
-        self.tipoCadenaMensaje = "Es diferente de"
+        self.typeString = "Es diferente de"
 
     def message_PUNTOCOMA(self):
-        self.tipoCadenaMensaje = "Punto y coma"
+        self.typeString = "Punto y coma"
 
     def message_COMA(self):
-        self.tipoCadenaMensaje = "Coma"
+        self.typeString = "Coma"
 
     def message_PARENTESISABIERTO(self):
-        self.tipoCadenaMensaje = "Parentesis abierto"
+        self.typeString = "Parentesis abierto"
 
     def message_PARENTESISCERRADO(self):
-        self.tipoCadenaMensaje = "Parentesis abierto"
+        self.typeString = "Parentesis abierto"
 
     def message_LLAVEABIERTA(self):
-        self.tipoCadenaMensaje = "Llave abierta"
+        self.typeString = "Llave abierta"
 
     def message_LLAVECERRADA(self):
-        self.tipoCadenaMensaje = "Llave cerrada"
+        self.typeString = "Llave cerrada"
 
     def message_BRACKETABIERTO(self):
-        self.tipoCadenaMensaje = "Bracket abierto"
+        self.typeString = "Bracket abierto"
 
     def message_BRACKETCERRADO(self):
-        self.tipoCadenaMensaje = "Bracket cerrado"
+        self.typeString = "Bracket cerrado"
 
     def message_DOSPUNTOS(self):
-        self.tipoCadenaMensaje = "Dos puntos"
+        self.typeString = "Dos puntos"
 
     def message_IF(self):
-        self.tipoCadenaMensaje = "If"
+        self.typeString = "If"
 
     def message_WHILE(self):
-        self.tipoCadenaMensaje = "While"
+        self.typeString = "While"
 
     def message_RETURN(self):
-        self.tipoCadenaMensaje = "Return"
+        self.typeString = "Return"
 
     def message_ELSE(self):
-        self.tipoCadenaMensaje = "Else"
+        self.typeString = "Else"
 
     def message_INT(self):
-        self.tipoCadenaMensaje = "Int"
+        self.typeString = "Int"
 
     def message_FLOAT(self):
-        self.tipoCadenaMensaje = "Float"
+        self.typeString = "Float"
 
     def message_VOID(self):
-        self.tipoCadenaMensaje = "Void"
+        self.typeString = "Void"

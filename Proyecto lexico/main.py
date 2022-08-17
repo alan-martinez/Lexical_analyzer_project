@@ -10,8 +10,8 @@ def main():
     else:
         analyzer = Lexico(entrada)
 
-        print("\n\n")
-        print("**** Resultado: ")
+        print("**** Analisis lexico: *****")
+        print("Resultado: ")
         print("\n")
         print('{:<30}'.format("Entrada") + '{:<30}'.format("Simbolo") + '{:<5}'.format("Tipo"))
 
