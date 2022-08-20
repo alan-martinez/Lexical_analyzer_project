@@ -14,7 +14,7 @@ Resultado:
 Observaciones:
 
 
-Para realizar esta practica fue necesario implementar 24 diferentes simbolos, los cuales fueron los siguientes:
+Para realizar esta practica fue necesario implementar los diferentes simbolos, resaltando que algunos de ellos fueron divididos (como el simbolo de relacion) ya que al ser varios, se queria tener mejor control de cual seleccionaba el usuario, los cuales quedaron asi:
 
 ![image](https://user-images.githubusercontent.com/70921354/185727439-a6509c12-8269-405f-ad97-2a3f7edc4cd9.png)
 
