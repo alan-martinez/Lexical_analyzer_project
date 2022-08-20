@@ -3,7 +3,7 @@ from lex import Lexico
 
 def main():
 
-    entrada = str(input("Introduce codigo: "))
+    entrada = str(input("Introduce cadena a evaluar: "))
    
     if len(entrada) <= 0:
         print(entrada + " tiene errores, no valido")
